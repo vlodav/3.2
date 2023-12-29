@@ -1,0 +1,39 @@
+#include <iostream>
+#include <iomanip>
+#include <cmath>
+using namespace std;
+int main()
+{
+    setlocale(LC_ALL, "ru");
+    double x0;
+    cout << "введите начала диапазона при условии(-1 < x <= 1): ";
+    cin >> x0;
+    cout << "введите цонец диапазона при условии(-1 < x <= 1): ";
+    double xn;
+    cin >> xn;
+    cout << "введите шаг: ";
+    double dx;
+    cin >> dx;
+    cout << "введите точность вычислений: ";
+    double epsilon;
+    cin >> epsilon;
+    cout << fixed << setprecision(4);
+    cout << "       x       |    ln(x + 1)    |   Кол-во членов" << endl;
+    cout << "----------------------------------------------" << endl;
+
+    for (double x = x0; x <= xn; x += dx) {
+        double term = x;
+        double sum = term;
+        int n = 1;
+
+        while (abs(term) > epsilon) {
+            term *= (-x * n) / (n + 1);
+            sum += term;
+            n++;
+        }
+
+        cout << setw(12) << x << "   |" << setw(15) << sum << "   |" << setw(12) << n << endl;
+    }
+
+    return 0;
+}
